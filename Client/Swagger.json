@@ -1,0 +1,45 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "v1",
+		"title": "Server"
+	},
+	"host": "localhost:5992",
+	"schemes": [
+		"http"
+	],
+	"paths": {
+		"/api/User/HasUser": {
+			"post": {
+				"tags": [
+					"User"
+				],
+				"operationId": "User_HasUser",
+				"consumes": [],
+				"produces": [
+					"application/json",
+					"text/json",
+					"application/xml",
+					"text/xml"
+				],
+				"parameters": [
+					{
+						"name": "username",
+						"in": "query",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {}
+}
