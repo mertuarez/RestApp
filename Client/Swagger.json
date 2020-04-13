@@ -34,7 +34,6 @@
 					"200": {
 						"description": "OK",
             "schema": {
-              "x-nullable": false,
               "type": "boolean"
             }
 					}
