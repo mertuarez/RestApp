@@ -33,15 +33,10 @@
 				"responses": {
 					"200": {
 						"description": "OK",
-						"schema": {
-							"type": "boolean",
-							"required": true,
-							"x-type-dotnet": "System.Boolean",
-							"x-nullable": false
-						},
-						"required": true,
-						"x-type-dotnet": "System.Boolean",
-						"x-nullable": false
+            "schema": {
+              "x-nullable": false,
+              "type": "boolean"
+            }
 					}
 				}
 			}
