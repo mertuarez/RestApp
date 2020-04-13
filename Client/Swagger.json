@@ -34,8 +34,14 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"type": "boolean"
-						}
+							"type": "boolean",
+							"required": true,
+							"x-type-dotnet": "System.Boolean",
+							"x-nullable": false
+						},
+						"required": true,
+						"x-type-dotnet": "System.Boolean",
+						"x-nullable": false
 					}
 				}
 			}

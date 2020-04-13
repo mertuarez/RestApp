@@ -2,11 +2,36 @@ using System.Web.Http;
 using WebActivatorEx;
 using Server;
 using Swashbuckle.Application;
+using Swashbuckle.Swagger;
+using System.Web.Http.Description;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace Server
 {
+    public class Op : IOperationFilter
+    {
+        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        {
+            //throw new System.NotImplementedException();
+
+            foreach (var item in operation.responses.Values)
+            {
+
+                item.vendorExtensions.Add("required", true);
+                item.vendorExtensions.Add("x-type-dotnet", typeof(bool).FullName);
+                item.vendorExtensions.Add("x-nullable", false);
+
+                if (item.schema != null)
+                {
+                    item.schema.vendorExtensions.Add("required", true);
+                    item.schema.vendorExtensions.Add("x-type-dotnet", typeof(bool).FullName);
+                    item.schema.vendorExtensions.Add("x-nullable", false);
+                }
+            }
+        }
+    }
+
     public class SwaggerConfig
     {
         public static void Register()
@@ -16,6 +41,7 @@ namespace Server
             GlobalConfiguration.Configuration
                 .EnableSwagger(c =>
                     {
+                        c.OperationFilter<Op>();
                         // By default, the service root url is inferred from the request used to access the docs.
                         // However, there may be situations (e.g. proxy and load-balanced environments) where this does not
                         // resolve correctly. You can workaround this by providing your own code to determine the root URL.
@@ -61,7 +87,7 @@ namespace Server
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
